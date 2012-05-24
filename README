@@ -1,0 +1,19 @@
+IMO, one of the most annoying things about Android is its insistence that
+developers localize strings by referencing the strings in layouts using @string
+and placing the actual string in res/values/strings.xml.
+
+This script does that for you automatically. It will parse a layout file for
+any element with an android:text attribute. If that attribute has not already
+been localized, it generates the correct <string> element and writes it to the
+strings XML file. It will also re-write the layout file to use the new <string>
+element.
+
+The name of the string is the android:id of the element it came from. If the
+element doesn't have an android:id, a random string is used. If the name is
+duplicated in the strings.xml, a random string is appended.
+
+Errors and warnings are printed at the end of processing.
+
+Author: Joman Chu <github@notatypewriter.com>
+License: Public domain / Apache License 2.0 / GPLv3
+
