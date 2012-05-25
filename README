@@ -1,3 +1,8 @@
+Usage: %s <android layout file> <strings xml file>
+
+Recommended you install python-lxml, but this script should still work with
+nearly any Python installation.
+
 IMO, one of the most annoying things about Android is its insistence that
 developers localize strings by referencing the strings in layouts using @string
 and placing the actual string in res/values/strings.xml.

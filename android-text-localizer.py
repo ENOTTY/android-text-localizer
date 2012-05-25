@@ -23,6 +23,7 @@ duplicated in the strings.xml, a random string is appended.
 Errors and warnings are printed at the end of processing.
 
 Author: Joman Chu <github@notatypewriter.com>
+License: Public domain / Apache License 2.0 / GPLv3
 """
 
 import string
