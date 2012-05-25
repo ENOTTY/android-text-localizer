@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Usage: %s <android layout file> <strings xml file>
+Usage: ./android-text-localizer.py <android layout file> <strings xml file>
 
 Recommended you install python-lxml, but this script should still work with
 nearly any Python installation.
