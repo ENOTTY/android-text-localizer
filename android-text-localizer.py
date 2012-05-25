@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 
 """
+Usage: %s <android layout file> <strings xml file>
+
+Recommended you install python-lxml, but this script should still work with
+nearly any Python installation.
+
 IMO, one of the most annoying things about Android is its insistence that
 developers localize strings by referencing the strings in layouts using @string
 and placing the actual string in res/values/strings.xml.
@@ -23,7 +28,34 @@ Author: Joman Chu <github@notatypewriter.com>
 import string
 import random
 import sys
-from lxml import etree as ElementTree
+
+# Compatibility code stolen from http://lxml.de/tutorial.html
+try:
+  from lxml import etree as ElementTree
+  #print >> sys.stderr, "running with lxml.etree"
+except ImportError:
+  try:
+    # Python 2.5
+    import xml.etree.cElementTree as ElementTree
+    #print >> sys.stderr, "running with cElementTree on Python 2.5+"
+  except ImportError:
+    try:
+      # Python 2.5
+      import xml.etree.ElementTree as ElementTree
+      #print >> sys.stderr, "running with ElementTree on Python 2.5+"
+    except ImportError:
+      try:
+        # normal cElementTree install
+        import cElementTree as ElementTree
+        #print >> sys.stderr, "running with cElementTree"
+      except ImportError:
+        try:
+          # normal ElementTree install
+          import elementtree.ElementTree as ElementTree
+          #print >> sys.stderr, "running with ElementTree"
+        except ImportError:
+          print >> sys.stderr, "Failed to import ElementTree from any known place"
+          sys.exit(2)
 
 def gen_rand_str(size=10, chars=string.ascii_uppercase + string.digits + string.ascii_lowercase):
   """
@@ -34,7 +66,7 @@ def gen_rand_str(size=10, chars=string.ascii_uppercase + string.digits + string.
 
 # Check and set arguments
 if (len(sys.argv) < 3):
-  print >> sys.stderr, 'Usage %s <android layout file> <strings xml file>' % (sys.argv[0])
+  print >> sys.stderr, 'Usage: %s <android layout file> <strings xml file>' % (sys.argv[0])
   sys.exit(1)
 
 LAYOUTFILE = sys.argv[1]
